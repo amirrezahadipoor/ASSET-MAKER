@@ -48,13 +48,45 @@ def lambert_t(z: np.ndarray, ambient: float = 0.22,
     return np.clip((t - 0.5) * spread + 0.5, 0.0, 1.0)
 
 
+def normalize_t(t: np.ndarray, mask: np.ndarray,
+                lo: float = 0.02, hi: float = 0.98) -> np.ndarray:
+    """Stretch t to fill [lo, hi] over the mask so every mass uses its ramp."""
+    vals = t[mask]
+    if len(vals) == 0:
+        return t
+    tmin, tmax = float(vals.min()), float(vals.max())
+    if tmax - tmin < 1e-6:
+        return np.full_like(t, (lo + hi) / 2) * mask
+    out = lo + (hi - lo) * (t - tmin) / (tmax - tmin)
+    return np.clip(out, 0.0, 1.0) * mask
+
+
+def planar_light_t(mask: np.ndarray, cx: float, cy: float,
+                   rx: float, ry: float, scale: float = 0.95) -> np.ndarray:
+    """2D planar light: 1 toward the light (top-left), 0 away (bottom-right).
+
+    The reference rocks/lobes read as lit FACES, not just curved normals —
+    this term gives those clean large bands; radial_t blends it with the
+    dome lambert for roundness."""
+    xs, ys = grid(mask.shape[1], mask.shape[0])
+    u = (xs - cx) / max(rx, 0.5)
+    v = (ys - cy) / max(ry, 0.5)
+    l2 = LIGHT[:2] / np.linalg.norm(LIGHT[:2])
+    # pos toward the light (top-left) => u*l2[0]+v*l2[1] > 0 => bright
+    bright = np.clip((u * l2[0] + v * l2[1]) * scale, -1.0, 1.0) * 0.5 + 0.5
+    return bright * mask
+
+
 def radial_t(mask: np.ndarray, cx: float, cy: float,
              rx: float, ry: float) -> np.ndarray:
     """Shade t for a dome-shaped mass with top-left highlight."""
     z = dome_height(mask, cx, cy, rx, ry)
-    t = lambert_t(z)
-    # gamma > 1 compacts the highlight island like the reference rocks
-    t = np.clip(t, 0.0, 1.0) ** 1.18
+    lam = lambert_t(z)
+    planar = planar_light_t(mask, cx, cy, rx, ry)
+    t = 0.62 * planar + 0.38 * lam
+    t = normalize_t(t, mask)
+    # mild S-curve: clean large bands like the reference
+    t = np.clip(0.5 + (t - 0.5) * 1.1 + 0.05, 0.0, 1.0)
     return t * mask
 
 
@@ -89,9 +121,8 @@ def vertical_t(mask: np.ndarray, tilt: float = 0.18) -> np.ndarray:
         span = max(1, x1 - x0)
         u = np.clip((xs[x0:x1 + 1] - x0) / span * 2 - 1, -1, 1)
         z = np.sqrt(np.clip(1 - u * u, 0, 1))
-        # light from left: lambert with light (-0.6, -0.5, 0.62)
-        nx, nz = -u, z
-        lam = nx * LIGHT[0] + nz * LIGHT[2] + LIGHT[1] * 0.25
+        # outward normal is (u, 0, z); light from the left => bright at u<0
+        lam = u * LIGHT[0] + z * LIGHT[2] + LIGHT[1] * 0.25
         t[y, x0:x1 + 1] = np.clip(0.20 + 0.85 * np.clip(lam, 0, 1) + tilt * (u < 0),
                                   0.0, 1.0)
     return t * mask

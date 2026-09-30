@@ -94,6 +94,7 @@ def ellipse_ring_mask(w: int, h: int, cx: float, cy: float,
 
 def rect_mask(w: int, h: int, x0: int, y0: int, x1: int, y1: int) -> np.ndarray:
     m = np.zeros((h, w), dtype=bool)
+    x0, y0, x1, y1 = int(x0), int(y0), int(x1), int(y1)
     m[max(0, y0):min(h, y1 + 1), max(0, x0):min(w, x1 + 1)] = True
     return m
 

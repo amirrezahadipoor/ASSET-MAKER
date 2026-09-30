@@ -38,13 +38,19 @@ def sphere_mass(canvas: Canvas, cx: float, cy: float, r: float, ramp: Ramp,
 def dome_mass(canvas: Canvas, cx: float, cy: float, rx: float, ry: float,
               ramp: Ramp, rng: np.random.Generator,
               ruggedness: float = 0.16, lobes: int = 6,
-              mottle: float = 0.12, dither: bool = True,
-              outline: bool = True, t_boost: float = 0.0) -> np.ndarray:
-    """An organic lobe (foliage cluster unit, bush lobe, rock mass)."""
+              mottle: float = 0.12, dither: bool = False,
+              outline: bool = True, t_boost: float = 0.0,
+              t_span: float = 1.0) -> np.ndarray:
+    """An organic lobe (foliage cluster unit, bush lobe, rock mass).
+
+    t_span < 1 compresses the lobe's own ramp range so several lobes can
+    share one canopy light field (position via t_boost) without each lobe
+    reinventing a full highlight/shadow cycle — the reference canopy look."""
     radii = noise.radial_blob(rng, lobes=lobes, ruggedness=ruggedness)
     mask = shapes.blob_mask(canvas.w, canvas.h, cx, cy, rx, ry, radii)
     t = shading.radial_t(mask, cx, cy, rx, ry)
-    t = np.clip(t + t_boost, 0, 1)
+    t = 0.5 + (t - 0.5) * t_span + t_boost
+    t = np.clip(t, 0, 1)
     t = _modulate(t, mask, rng, mottle, cell=max(3, int(min(rx, ry) * 0.6)))
     shading.apply_shading(canvas, mask, t, ramp, dither=dither)
     if outline:
@@ -158,6 +164,31 @@ def box_mass(canvas: Canvas, cx: float, y_top: float, hw: float, hd: float,
     seam_outline(canvas, top, right, ramp.outline)
     seam_outline(canvas, left, right, ramp.outline)
     return union
+
+
+def seed_nicks(canvas: Canvas, mask: np.ndarray, ramp: Ramp,
+               rng: np.random.Generator, count: int = 2) -> None:
+    """Tiny 1 px weathering nicks/scratches at rng positions inside a mask.
+
+    Also guarantees per-seed uniqueness of quantized output."""
+    h, w = mask.shape
+    inner = shapes.erode(mask, 1)
+    ys, xs = np.nonzero(inner)
+    if len(ys) < 8:
+        return
+    dark = ramp.steps[0]
+    mid = ramp.steps[1]
+    for _ in range(count):
+        i = int(rng.integers(0, len(ys)))
+        y, x = int(ys[i]), int(xs[i])
+        length = int(rng.integers(2, 5))
+        horizontal = bool(rng.integers(0, 2))
+        nick = np.zeros((h, w), dtype=bool)
+        if horizontal:
+            nick[y:y + 1, x:min(w, x + length)] = True
+        else:
+            nick[y:min(h, y + length), x:x + 1] = True
+        canvas.fill_mask(nick & inner, mid if rng.random() < 0.5 else dark)
 
 
 def crack_lines(canvas: Canvas, mask: np.ndarray, ramp: Ramp,
