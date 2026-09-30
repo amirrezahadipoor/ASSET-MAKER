@@ -1,0 +1,181 @@
+{
+  "id": "structure_statue_v01_s48",
+  "category": "structure",
+  "kind": "statue",
+  "variant": 1,
+  "seed": 48,
+  "engine_version": "1.0.0",
+  "size": [
+    52,
+    108
+  ],
+  "anchor": [
+    26,
+    100
+  ],
+  "files": {
+    "full": "structure_statue_v01_s48_full.png",
+    "shadow": "structure_statue_v01_s48_shadow.png",
+    "parts": {
+      "plinth": "structure_statue_v01_s48_part-plinth.png",
+      "figure": "structure_statue_v01_s48_part-figure.png"
+    },
+    "sheets": {
+      "idle": "structure_statue_v01_s48_sheet-idle.png"
+    }
+  },
+  "rig": {
+    "bones": [
+      {
+        "name": "base",
+        "parent": null,
+        "pos": [
+          26,
+          88
+        ],
+        "rot": 0.0,
+        "length": 26.0
+      },
+      {
+        "name": "figure",
+        "parent": "base",
+        "pos": [
+          26,
+          62
+        ],
+        "rot": 0.0,
+        "length": 30.0
+      }
+    ],
+    "parts": [
+      {
+        "name": "plinth",
+        "file": "part-plinth.png",
+        "bone": "base",
+        "pivot": [
+          26,
+          88
+        ],
+        "z": 10
+      },
+      {
+        "name": "figure",
+        "file": "part-figure.png",
+        "bone": "figure",
+        "pivot": [
+          26,
+          62
+        ],
+        "z": 20
+      }
+    ],
+    "animations": {
+      "idle": {
+        "loop": true,
+        "fps": 2,
+        "frames": [
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "figure": -1.2
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "figure": 0.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "figure": 1.2
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "figure": 0.0
+            },
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "palette": [
+    "#10141f",
+    "#2c4418",
+    "#383931",
+    "#494a42",
+    "#605d4e",
+    "#96928e",
+    "#b1af9a",
+    "#c9cdc1",
+    "#494747"
+  ],
+  "qa": {
+    "passed": true,
+    "checks": {
+      "palette_only": {
+        "passed": true,
+        "detail": "all colors in master palette"
+      },
+      "alpha_binary": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_shadow": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-plinth": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-figure": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "outline_closed": {
+        "passed": true,
+        "detail": "closed outline, colors ['#10141f']"
+      },
+      "silhouette_readable": {
+        "passed": true,
+        "detail": "36x99, fill 0.49, comps 2"
+      },
+      "light_direction": {
+        "passed": true,
+        "detail": "top-left lum 0.431 vs bottom-right 0.320"
+      },
+      "size_limits": {
+        "passed": true,
+        "detail": "36x99 within 16-192 for structure"
+      },
+      "anchor_inside": {
+        "passed": true,
+        "detail": "anchor (26, 100) ok"
+      },
+      "rig_recompose": {
+        "passed": true,
+        "detail": "0/5616 pixels differ"
+      }
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+  "id": "animal_chicken_v01_s55",
+  "category": "animal",
+  "kind": "chicken",
+  "variant": 1,
+  "seed": 55,
+  "engine_version": "1.0.0",
+  "size": [
+    40,
+    38
+  ],
+  "anchor": [
+    17,
+    32
+  ],
+  "files": {
+    "full": "animal_chicken_v01_s55_full.png",
+    "shadow": "animal_chicken_v01_s55_shadow.png",
+    "parts": {
+      "leg-back": "animal_chicken_v01_s55_part-leg-back.png",
+      "leg-front": "animal_chicken_v01_s55_part-leg-front.png",
+      "tail": "animal_chicken_v01_s55_part-tail.png",
+      "body": "animal_chicken_v01_s55_part-body.png",
+      "wing": "animal_chicken_v01_s55_part-wing.png",
+      "head": "animal_chicken_v01_s55_part-head.png"
+    },
+    "sheets": {
+      "idle": "animal_chicken_v01_s55_sheet-idle.png",
+      "walk": "animal_chicken_v01_s55_sheet-walk.png",
+      "peck": "animal_chicken_v01_s55_sheet-peck.png"
+    }
+  },
+  "rig": {
+    "bones": [
+      {
+        "name": "root",
+        "parent": null,
+        "pos": [
+          17,
+          21
+        ],
+        "rot": 0.0,
+        "length": 8.0
+      },
+      {
+        "name": "tail",
+        "parent": "root",
+        "pos": [
+          11,
+          17
+        ],
+        "rot": 0.0,
+        "length": 6.0
+      },
+      {
+        "name": "neck",
+        "parent": "root",
+        "pos": [
+          21,
+          15
+        ],
+        "rot": 0.0,
+        "length": 5.0
+      },
+      {
+        "name": "head",
+        "parent": "neck",
+        "pos": [
+          27,
+          12
+        ],
+        "rot": 0.0,
+        "length": 5.0
+      },
+      {
+        "name": "wing",
+        "parent": "root",
+        "pos": [
+          17,
+          21
+        ],
+        "rot": 0.0,
+        "length": 6.0
+      },
+      {
+        "name": "leg-back",
+        "parent": "root",
+        "pos": [
+          14,
+          27
+        ],
+        "rot": 0.0,
+        "length": 5.0
+      },
+      {
+        "name": "leg-front",
+        "parent": "root",
+        "pos": [
+          20,
+          27
+        ],
+        "rot": 0.0,
+        "length": 5.0
+      }
+    ],
+    "parts": [
+      {
+        "name": "leg-back",
+        "file": "part-leg-back.png",
+        "bone": "leg-back",
+        "pivot": [
+          14,
+          27
+        ],
+        "z": 12
+      },
+      {
+        "name": "tail",
+        "file": "part-tail.png",
+        "bone": "tail",
+        "pivot": [
+          11,
+          17
+        ],
+        "z": 15
+      },
+      {
+        "name": "leg-front",
+        "file": "part-leg-front.png",
+        "bone": "leg-front",
+        "pivot": [
+          20,
+          27
+        ],
+        "z": 18
+      },
+      {
+        "name": "body",
+        "file": "part-body.png",
+        "bone": "root",
+        "pivot": [
+          17,
+          21
+        ],
+        "z": 20
+      },
+      {
+        "name": "wing",
+        "file": "part-wing.png",
+        "bone": "wing",
+        "pivot": [
+          17,
+          21
+        ],
+        "z": 25
+      },
+      {
+        "name": "head",
+        "file": "part-head.png",
+        "bone": "head",
+        "pivot": [
+          22,
+          15
+        ],
+        "z": 30
+      }
+    ],
+    "animations": {
+      "idle": {
+        "loop": true,
+        "fps": 5,
+        "frames": [
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "neck": -3.0,
+              "head": 2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "neck": 0.0,
+              "head": 0.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "neck": 3.0,
+              "head": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "neck": 0.0,
+              "head": 0.0
+            },
+            "duration": 1
+          }
+        ]
+      },
+      "walk": {
+        "loop": true,
+        "fps": 8,
+        "frames": [
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "leg-front": 18.0,
+              "leg-back": -18.0,
+              "neck": -4.0,
+              "tail": 4.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "leg-front": 6.0,
+              "leg-back": -6.0,
+              "neck": -2.0,
+              "tail": 2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "leg-front": -18.0,
+              "leg-back": 18.0,
+              "neck": 0.0,
+              "tail": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "leg-front": -18.0,
+              "leg-back": 18.0,
+              "neck": -4.0,
+              "tail": -4.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "leg-front": 6.0,
+              "leg-back": -6.0,
+              "neck": -2.0,
+              "tail": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "leg-front": 18.0,
+              "leg-back": -18.0,
+              "neck": 0.0,
+              "tail": 2.0
+            },
+            "duration": 1
+          }
+        ]
+      },
+      "peck": {
+        "loop": false,
+        "fps": 6,
+        "frames": [
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "neck": 4.0,
+              "head": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "neck": 28.0,
+              "head": 14.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              1
+            ],
+            "bones": {
+              "neck": 36.0,
+              "head": 18.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "neck": 12.0,
+              "head": 4.0
+            },
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "palette": [
+    "#10141f",
+    "#2c4418",
+    "#abb948",
+    "#1c1815",
+    "#231a14",
+    "#7e6621",
+    "#d9cba6",
+    "#8a8064",
+    "#efe7c3",
+    "#952c2d",
+    "#392f15",
+    "#b1a888"
+  ],
+  "qa": {
+    "passed": true,
+    "checks": {
+      "palette_only": {
+        "passed": true,
+        "detail": "all colors in master palette"
+      },
+      "alpha_binary": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_shadow": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-leg-back": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-leg-front": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-tail": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-body": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-wing": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-head": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "outline_closed": {
+        "passed": true,
+        "detail": "closed outline, colors ['#231a14', '#392f15']"
+      },
+      "silhouette_readable": {
+        "passed": true,
+        "detail": "33x27, fill 0.44, comps 4"
+      },
+      "light_direction": {
+        "passed": true,
+        "detail": "top-left lum 0.463 vs bottom-right 0.434"
+      },
+      "size_limits": {
+        "passed": true,
+        "detail": "33x27 within 8-48 for animal"
+      },
+      "anchor_inside": {
+        "passed": true,
+        "detail": "anchor (17, 32) ok"
+      },
+      "rig_recompose": {
+        "passed": true,
+        "detail": "0/1520 pixels differ"
+      }
+    }
+  }
+}
