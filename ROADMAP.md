@@ -20,7 +20,7 @@ milestone whose gate failed.
       on plinth, static + optional subtle rig)
 - [x] M6 Recipe `human` (modular parts: hair, tunic colors, 4 directions),
       docs: RECIPE_GUIDE.md so another AI can add a new recipe in one file
-- [ ] M7 Polish: variant diversity, performance, README with every CLI command
+- [x] M7 Polish: variant diversity, performance, README with every CLI command
       and the manifest schema
 
 ## Status log
@@ -112,3 +112,22 @@ Honest critique: villager silhouette/shading reads in style; faces are
 minimal (2 px eyes) like the reference; left/right profiles are simplified
 (one eye + nose bump, no ear). 39 pytest tests green (all kinds gated at 3
 seeds, 20-seed uniqueness for the 8 main kinds).
+
+### 2026-09-30 M7 — PASS
+Built: full README (install, every CLI command, strict naming rules, complete
+manifest.json schema, Godot usage, QA gates, CI docs, repo layout), contact
+sheets for all 8 art kinds, workflow_dispatch full render (10 kinds x 16
+seeds). Variant diversity: rock 3 silhouettes, bush 4 layouts + flowers,
+barrel/crate 2 sizes, tree 3 silhouettes, chicken 3 colorways, statue 3
+armaments, human 48 (4 directions x 3 hairs x 4 tunics). Perf: full asset
+render < 0.3 s. 39 tests green.
+
+## All milestones complete (2026-09-30)
+Honest summary of remaining weaknesses (post-M7 backlog):
+- foliage interiors are banded lobe masses vs the reference's finer leaf
+  texture; flowers are 2 px blobs vs shaped petals
+- human side profiles simplified (no ear, minimal nose)
+- statue figure blockier than the reference knight
+- image-viewer tooling served stale images this session; all inspection was
+  pixel-map + quantitative (color stats vs reference crops) — a final visual
+  pass by human eyes is recommended before production use.
