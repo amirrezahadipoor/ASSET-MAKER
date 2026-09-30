@@ -16,23 +16,26 @@ def kinds():
 
 
 def test_registry_not_empty(kinds):
-    assert len(kinds) >= 4
+    assert len(kinds) >= 8
 
 
 @pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "tree",
-                                  "sphere", "cube"])
+                                  "chicken", "statue", "human", "sphere",
+                                  "cube"])
 def test_kind_passes_gates(kind):
     catalog.load_all()
     for seed in (7, 42, 99):
         res = catalog.get(kind).fn(seed, 1)
         full = res.full()
-        obj_mask = res.parts["body"].alpha_mask()
+        from assetmaker.cli import _composite_parts
+        obj_mask = _composite_parts(res.parts, res.part_order()).alpha_mask()
         qa = gates.evaluate(res, full, obj_mask, recomposed=full)
         failed = [k for k, v in qa["checks"].items() if not v["passed"]]
         assert qa["passed"], f"{kind} seed {seed}: {failed}"
 
 
-@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "tree"])
+@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "tree",
+                                  "chicken", "statue", "human"])
 def test_twenty_seeds_unique_and_whole(kind):
     catalog.load_all()
     digests = []

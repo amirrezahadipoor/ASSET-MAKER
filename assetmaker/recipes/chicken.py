@@ -113,6 +113,7 @@ def make_chicken(seed: int, variant: int = 1) -> AssetResult:
     t = np.clip(t - 0.16 * (planar < 0.45), 0.0, 1.0)
     t = primitives._modulate(t, bmask, rng, 0.05, cell=6)
     shading.apply_shading(body, bmask, t, ramp)
+    primitives.seed_nicks(body, bmask, ramp, rng, count=3)  # feather texture
     outline_silhouette(body, bmask, ramp.outline)
     parts["body"] = body
 

@@ -18,7 +18,7 @@ milestone whose gate failed.
       Godot loader. Gate: rig recomposes to the full image
 - [x] M5 Recipe `chicken` (with rig, idle, walk, peck) and `statue` (knight
       on plinth, static + optional subtle rig)
-- [ ] M6 Recipe `human` (modular parts: hair, tunic colors, 4 directions),
+- [x] M6 Recipe `human` (modular parts: hair, tunic colors, 4 directions),
       docs: RECIPE_GUIDE.md so another AI can add a new recipe in one file
 - [ ] M7 Polish: variant diversity, performance, README with every CLI command
       and the manifest schema
@@ -99,3 +99,16 @@ Statue: plinth/figure silhouettes and stone shading are right; the figure is
 simpler than the reference knight (no tabard emblem, blockier helmet).
 Note: image-viewer tooling served stale images this session; all visual
 inspection is pixel-map + quantitative based.
+
+### 2026-09-30 M6 — PASS
+Built: human recipe (modular parts legs/tunic/head/hair, 4 directions
+down/up/left/right, 3 hair colors, 4 tunic colors = 48 variants; idle+walk
+sheets; root/head/arms rig) and RECIPE_GUIDE.md (one-file recipe contract,
+toolkit, variant/seed rules, new-color policy, rig guide, pre-commit
+checklist). Generated variant ramps (tunic_*, hair_*, hen_brown) are
+deterministic and registered into the master palette so `palette_only` stays
+honest (fixed a stale-import gate bug along the way).
+Honest critique: villager silhouette/shading reads in style; faces are
+minimal (2 px eyes) like the reference; left/right profiles are simplified
+(one eye + nose bump, no ear). 39 pytest tests green (all kinds gated at 3
+seeds, 20-seed uniqueness for the 8 main kinds).

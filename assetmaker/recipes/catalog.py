@@ -43,4 +43,4 @@ def get(kind: str) -> Recipe:
 
 def load_all() -> None:
     """Import every built-in recipe module so registration runs."""
-    from . import barrel, bush, chicken, crate, demo, rock, statue, tree  # noqa: F401
+    from . import barrel, bush, chicken, crate, demo, human, rock, statue, tree  # noqa: F401

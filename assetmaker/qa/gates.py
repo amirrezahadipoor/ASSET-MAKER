@@ -9,7 +9,7 @@ import re
 import numpy as np
 
 from ..core.export import NAME_RE, AssetResult
-from ..core.palette import ALL_COLORS
+from ..core import palette
 from ..core.shapes import Canvas, boundary_mask, dilate, erode
 
 # category -> (min, max) inclusive size in px
@@ -44,7 +44,7 @@ def check_alpha_binary(canvas: Canvas) -> tuple[bool, str]:
 
 
 def check_palette_only(colors_used: set[str]) -> tuple[bool, str]:
-    bad = sorted(c for c in colors_used if c not in ALL_COLORS)
+    bad = sorted(c for c in colors_used if c not in palette.ALL_COLORS)
     return not bad, ("all colors in master palette" if not bad
                      else f"stray colors: {bad}")
 

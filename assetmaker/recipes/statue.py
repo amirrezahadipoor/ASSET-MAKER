@@ -24,9 +24,9 @@ METAL = RAMPS["metal"]
           doc="knight statue on stepped plinth, subtle sway rig")
 def make_statue(seed: int, variant: int = 1) -> AssetResult:
     rng = noise.rng_for("statue", variant, seed)
-    w, h = 52, 108
-    cx = 26
-    ground_y = 100
+    w, h = 58, 112
+    cx = 29
+    ground_y = 103
 
     parts: dict[str, Canvas] = {}
 
@@ -46,6 +46,7 @@ def make_statue(seed: int, variant: int = 1) -> AssetResult:
                                        cx + 17, ground_y - 1))
     t = primitives._modulate(t, pmask, rng, 0.05, cell=5)
     shading.apply_shading(plinth, pmask, t, STONE)
+    primitives.seed_nicks(plinth, pmask, STONE, rng, count=3)  # weathering
     # slab seams
     for yy in (ground_y - 12, ground_y - 22):
         seam = shapes.rect_mask(w, h, cx - 18, yy - 1, cx + 17, yy - 1)
@@ -105,6 +106,7 @@ def make_statue(seed: int, variant: int = 1) -> AssetResult:
         shapes.rect_mask(w, h, cx + 1, fy - 55, cx + 13, fy - 1))
     t = primitives._modulate(t, fmask, rng, 0.06, cell=5)
     shading.apply_shading(fig, fmask, t, STONE)
+    primitives.seed_nicks(fig, fmask, STONE, rng, count=3)  # weathering
     # tabard detail: belt + fold line
     belt = shapes.rect_mask(w, h, cx - 6, fy - 26, cx + 6, fy - 24)
     fig.fill_mask(belt & fmask, METAL.steps[1])
