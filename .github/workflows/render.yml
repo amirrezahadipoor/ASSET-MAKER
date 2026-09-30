@@ -1,0 +1,99 @@
+name: render
+
+on:
+  push:
+  workflow_dispatch:
+    inputs:
+      kind:
+        description: "Asset kind to render (or 'all')"
+        required: false
+        default: "all"
+      seeds:
+        description: "Number of seeds to render per kind"
+        required: false
+        default: "16"
+      variant:
+        description: "Variant number"
+        required: false
+        default: "1"
+
+permissions:
+  contents: write
+
+jobs:
+  test-and-render:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Tests
+        run: pytest -q
+
+      - name: Render assets
+        run: |
+          KIND="${{ github.event.inputs.kind || 'all' }}"
+          SEEDS="${{ github.event.inputs.seeds || '16' }}"
+          VARIANT="${{ github.event.inputs.variant || '1' }}"
+          if [ "$KIND" = "all" ]; then
+            KINDS=$(python -c "from assetmaker.recipes import catalog; catalog.load_all(); print(' '.join(sorted(catalog.REGISTRY)))")
+          else
+            KINDS="$KIND"
+          fi
+          echo "kinds: $KINDS"
+          FAILED=0
+          for k in $KINDS; do
+            # quality gates run inside make and exit non-zero on failure
+            python -m assetmaker make "$k" --seed 42 --seeds "$SEEDS" --variant "$VARIANT" || FAILED=1
+            python -m assetmaker sheet "$k" --seed 42 --count 16 --variant "$VARIANT" --output "out/contact_sheet_${k}.png"
+          done
+          if [ "$FAILED" -ne 0 ]; then
+            echo "::error::quality gates failed"
+            exit 1
+          fi
+
+      - name: Upload outputs + contact sheets
+        uses: actions/upload-artifact@v4
+        with:
+          name: assets-${{ github.run_number }}
+          path: |
+            out/
+          if-no-files-found: error
+
+      - name: Commit previews to render-output branch
+        if: always()
+        run: |
+          git config user.name "assetmaker-ci"
+          git config user.email "assetmaker-ci@users.noreply.github.com"
+          git fetch origin render-output || true
+          if git rev-parse --verify --quiet origin/render-output >/dev/null; then
+            git checkout -B render-output origin/render-output
+          else
+            git checkout --orphan render-output
+            git rm -r --cached . >/dev/null 2>&1 || true
+            git commit --allow-empty -m "init render-output"
+          fi
+          rm -rf previews
+          mkdir -p previews
+          find out -name '*_full.png' -exec cp -t previews {} + 2>/dev/null || true
+          find out -name '*_shadow.png' -exec cp -t previews {} + 2>/dev/null || true
+          find out -name 'contact_sheet_*.png' -exec cp -t previews {} + 2>/dev/null || true
+          find out -name 'manifest.json' -exec cp --parents -t previews {} + 2>/dev/null || true
+          git add -A previews
+          if git diff --cached --quiet; then
+            echo "no preview changes"
+          else
+            git commit -m "render: run ${{ github.run_number }} (${{ github.sha }})"
+            git push origin render-output
+          fi

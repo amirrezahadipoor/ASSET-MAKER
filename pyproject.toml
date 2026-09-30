@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "assetmaker"
+version = "1.0.0"
+description = "Fully procedural 2D pixel-art asset engine"
+requires-python = ">=3.11"
+dependencies = [
+    "Pillow>=10.0",
+    "numpy>=1.26",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.4"]
+
+[project.scripts]
+assetmaker = "assetmaker.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["assetmaker*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
