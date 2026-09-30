@@ -1,0 +1,81 @@
+{
+  "id": "nature_bush_v01_s50",
+  "category": "nature",
+  "kind": "bush",
+  "variant": 1,
+  "seed": 50,
+  "engine_version": "1.0.0",
+  "size": [
+    50,
+    45
+  ],
+  "anchor": [
+    25,
+    35
+  ],
+  "files": {
+    "full": "nature_bush_v01_s50_full.png",
+    "shadow": "nature_bush_v01_s50_shadow.png",
+    "parts": {
+      "body": "nature_bush_v01_s50_part-body.png"
+    },
+    "sheets": {}
+  },
+  "rig": null,
+  "palette": [
+    "#10141f",
+    "#0b3836",
+    "#124f33",
+    "#2c4418",
+    "#42640a",
+    "#367a0c",
+    "#53802c",
+    "#64bd18",
+    "#76bc3a"
+  ],
+  "qa": {
+    "passed": true,
+    "checks": {
+      "palette_only": {
+        "passed": true,
+        "detail": "all colors in master palette"
+      },
+      "alpha_binary": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_shadow": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-body": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "outline_closed": {
+        "passed": true,
+        "detail": "closed outline, colors ['#10141f']"
+      },
+      "silhouette_readable": {
+        "passed": true,
+        "detail": "41x28, fill 0.65, comps 1"
+      },
+      "light_direction": {
+        "passed": true,
+        "detail": "top-left lum 0.442 vs bottom-right 0.255"
+      },
+      "size_limits": {
+        "passed": true,
+        "detail": "41x28 within 12-128 for nature"
+      },
+      "anchor_inside": {
+        "passed": true,
+        "detail": "anchor (25, 35) ok"
+      },
+      "rig_recompose": {
+        "passed": true,
+        "detail": "0/2250 pixels differ"
+      }
+    }
+  }
+}

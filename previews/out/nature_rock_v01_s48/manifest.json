@@ -1,0 +1,80 @@
+{
+  "id": "nature_rock_v01_s48",
+  "category": "nature",
+  "kind": "rock",
+  "variant": 1,
+  "seed": 48,
+  "engine_version": "1.0.0",
+  "size": [
+    34,
+    28
+  ],
+  "anchor": [
+    17,
+    18
+  ],
+  "files": {
+    "full": "nature_rock_v01_s48_full.png",
+    "shadow": "nature_rock_v01_s48_shadow.png",
+    "parts": {
+      "body": "nature_rock_v01_s48_part-body.png"
+    },
+    "sheets": {}
+  },
+  "rig": null,
+  "palette": [
+    "#2c4418",
+    "#121723",
+    "#343130",
+    "#494744",
+    "#6b6d69",
+    "#878480",
+    "#aea9a5",
+    "#c9cdc1"
+  ],
+  "qa": {
+    "passed": true,
+    "checks": {
+      "palette_only": {
+        "passed": true,
+        "detail": "all colors in master palette"
+      },
+      "alpha_binary": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_shadow": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-body": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "outline_closed": {
+        "passed": true,
+        "detail": "closed outline, colors ['#121723']"
+      },
+      "silhouette_readable": {
+        "passed": true,
+        "detail": "24x14, fill 0.77, comps 1"
+      },
+      "light_direction": {
+        "passed": true,
+        "detail": "top-left lum 0.519 vs bottom-right 0.347"
+      },
+      "size_limits": {
+        "passed": true,
+        "detail": "24x14 within 12-128 for nature"
+      },
+      "anchor_inside": {
+        "passed": true,
+        "detail": "anchor (17, 18) ok"
+      },
+      "rig_recompose": {
+        "passed": true,
+        "detail": "0/952 pixels differ"
+      }
+    }
+  }
+}
