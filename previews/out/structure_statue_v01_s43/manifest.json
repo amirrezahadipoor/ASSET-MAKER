@@ -6,12 +6,12 @@
   "seed": 43,
   "engine_version": "1.0.0",
   "size": [
-    52,
-    108
+    58,
+    112
   ],
   "anchor": [
-    26,
-    100
+    29,
+    103
   ],
   "files": {
     "full": "structure_statue_v01_s43_full.png",
@@ -30,8 +30,8 @@
         "name": "base",
         "parent": null,
         "pos": [
-          26,
-          88
+          29,
+          91
         ],
         "rot": 0.0,
         "length": 26.0
@@ -40,8 +40,8 @@
         "name": "figure",
         "parent": "base",
         "pos": [
-          26,
-          62
+          29,
+          65
         ],
         "rot": 0.0,
         "length": 30.0
@@ -53,8 +53,8 @@
         "file": "part-plinth.png",
         "bone": "base",
         "pivot": [
-          26,
-          88
+          29,
+          91
         ],
         "z": 10
       },
@@ -63,8 +63,8 @@
         "file": "part-figure.png",
         "bone": "figure",
         "pivot": [
-          26,
-          62
+          29,
+          65
         ],
         "z": 20
       }
@@ -162,7 +162,7 @@
       },
       "light_direction": {
         "passed": true,
-        "detail": "top-left lum 0.431 vs bottom-right 0.320"
+        "detail": "top-left lum 0.424 vs bottom-right 0.319"
       },
       "size_limits": {
         "passed": true,
@@ -170,11 +170,11 @@
       },
       "anchor_inside": {
         "passed": true,
-        "detail": "anchor (26, 100) ok"
+        "detail": "anchor (29, 103) ok"
       },
       "rig_recompose": {
         "passed": true,
-        "detail": "0/5616 pixels differ"
+        "detail": "0/6496 pixels differ"
       }
     }
   }

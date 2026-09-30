@@ -1,0 +1,284 @@
+{
+  "id": "human_human_v01_s48",
+  "category": "human",
+  "kind": "human",
+  "variant": 1,
+  "seed": 48,
+  "engine_version": "1.0.0",
+  "size": [
+    32,
+    43
+  ],
+  "anchor": [
+    16,
+    39
+  ],
+  "files": {
+    "full": "human_human_v01_s48_full.png",
+    "shadow": "human_human_v01_s48_shadow.png",
+    "parts": {
+      "legs": "human_human_v01_s48_part-legs.png",
+      "tunic": "human_human_v01_s48_part-tunic.png",
+      "head": "human_human_v01_s48_part-head.png",
+      "hair": "human_human_v01_s48_part-hair.png"
+    },
+    "sheets": {
+      "idle": "human_human_v01_s48_sheet-idle.png",
+      "walk": "human_human_v01_s48_sheet-walk.png"
+    }
+  },
+  "rig": {
+    "bones": [
+      {
+        "name": "root",
+        "parent": null,
+        "pos": [
+          16,
+          24
+        ],
+        "rot": 0.0,
+        "length": 8.0
+      },
+      {
+        "name": "head",
+        "parent": "root",
+        "pos": [
+          16,
+          15
+        ],
+        "rot": 0.0,
+        "length": 6.0
+      },
+      {
+        "name": "arm-l",
+        "parent": "root",
+        "pos": [
+          9,
+          18
+        ],
+        "rot": 0.0,
+        "length": 8.0
+      },
+      {
+        "name": "arm-r",
+        "parent": "root",
+        "pos": [
+          23,
+          18
+        ],
+        "rot": 0.0,
+        "length": 8.0
+      }
+    ],
+    "parts": [
+      {
+        "name": "legs",
+        "file": "part-legs.png",
+        "bone": "root",
+        "pivot": [
+          16,
+          24
+        ],
+        "z": 10
+      },
+      {
+        "name": "tunic",
+        "file": "part-tunic.png",
+        "bone": "root",
+        "pivot": [
+          16,
+          22
+        ],
+        "z": 20
+      },
+      {
+        "name": "head",
+        "file": "part-head.png",
+        "bone": "head",
+        "pivot": [
+          16,
+          15
+        ],
+        "z": 30
+      },
+      {
+        "name": "hair",
+        "file": "part-hair.png",
+        "bone": "head",
+        "pivot": [
+          16,
+          15
+        ],
+        "z": 40
+      }
+    ],
+    "animations": {
+      "idle": {
+        "loop": true,
+        "fps": 4,
+        "frames": [
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "head": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {},
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "head": 2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {},
+            "duration": 1
+          }
+        ]
+      },
+      "walk": {
+        "loop": true,
+        "fps": 6,
+        "frames": [
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "arm-l": 14.0,
+              "arm-r": -14.0,
+              "head": -2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "arm-l": 4.0,
+              "arm-r": -4.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              -1
+            ],
+            "bones": {
+              "arm-l": -14.0,
+              "arm-r": 14.0,
+              "head": 2.0
+            },
+            "duration": 1
+          },
+          {
+            "root": [
+              0,
+              0
+            ],
+            "bones": {
+              "arm-l": -4.0,
+              "arm-r": 4.0
+            },
+            "duration": 1
+          }
+        ]
+      }
+    }
+  },
+  "palette": [
+    "#10141f",
+    "#2c4418",
+    "#1c1815",
+    "#3c230e",
+    "#523319",
+    "#231a14",
+    "#c66343",
+    "#5c5037",
+    "#8a774f",
+    "#a05a3c",
+    "#df8568",
+    "#f0a888",
+    "#000000"
+  ],
+  "qa": {
+    "passed": true,
+    "checks": {
+      "palette_only": {
+        "passed": true,
+        "detail": "all colors in master palette"
+      },
+      "alpha_binary": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_shadow": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-legs": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-tunic": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-head": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "alpha_binary_part-hair": {
+        "passed": true,
+        "detail": "alpha values: [0, 255]"
+      },
+      "outline_closed": {
+        "passed": true,
+        "detail": "closed outline, colors ['#000000', '#1c1815', '#231a14', '#261d04']"
+      },
+      "silhouette_readable": {
+        "passed": true,
+        "detail": "23x35, fill 0.52, comps 1"
+      },
+      "light_direction": {
+        "passed": true,
+        "detail": "top-left lum 0.253 vs bottom-right 0.195"
+      },
+      "size_limits": {
+        "passed": true,
+        "detail": "23x35 within 20-48 for human"
+      },
+      "anchor_inside": {
+        "passed": true,
+        "detail": "anchor (16, 39) ok"
+      },
+      "rig_recompose": {
+        "passed": true,
+        "detail": "0/1376 pixels differ"
+      }
+    }
+  }
+}

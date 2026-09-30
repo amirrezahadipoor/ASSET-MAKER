@@ -415,7 +415,7 @@
       },
       "light_direction": {
         "passed": true,
-        "detail": "top-left lum 0.466 vs bottom-right 0.433"
+        "detail": "top-left lum 0.466 vs bottom-right 0.431"
       },
       "size_limits": {
         "passed": true,
