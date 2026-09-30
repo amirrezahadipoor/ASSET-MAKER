@@ -11,7 +11,7 @@ milestone whose gate failed.
       manifest writer, naming. Gate: a sphere and a cube render in the style
 - [x] M2 Recipe `bush` (many variants) + `rock` + `barrel` + `crate`
       Gate: side by side with the reference, honest critique
-- [ ] M3 Recipe `tree` (leaf clusters, trunk, roots, shadow). Hardest static
+- [x] M3 Recipe `tree` (leaf clusters, trunk, roots, shadow). Hardest static
       quality test; do not continue until it is convincingly close to the
       reference trees
 - [ ] M4 Rig system: parts, bones, pivots, idle/walk animation exporter,
@@ -61,3 +61,20 @@ Honest critique vs reference:
 Gates: palette purity, alpha binary, closed outline, silhouette, light
 direction, size limits, anchor, rig recompose, 20-seed diversity — all pass
 (26 pytest tests).
+
+### 2026-09-30 M3 — PASS
+Built: tree recipe — tapered trunk with root flares, bark streaks, 2-3
+branches, solid 9-12 lobe canopy with one shared light field (yellow-green
+top-left -> teal shadow pockets bottom-right), short branch forks peeking
+through the canopy's lower edge, large bottom-right ground shadow.
+Gate check vs reference foliage regions (mean RGB / saturation):
+- tree render (0.235, 0.392, 0.103), sat 0.720
+- reference regions: (0.261, 0.430, 0.135) sat 0.699 / (0.229, 0.373, 0.137)
+  sat 0.689 / (0.173, 0.358, 0.117) sat 0.755 -> inside the reference range.
+Honest critique vs reference trees: canopy mass, hue-shift and lobe seams
+match the style; the silhouette is still rounder/cauliflower-ish vs the
+reference's more varied lobe sizes and drooping lower clusters; branches are
+subtler than the reference's visible forks. Inspected at pixel level (the
+workspace image viewer is serving stale images this session, so visual checks
+are ASCII pixel maps + quantitative stats — noted for transparency).
+Gates: 28 pytest tests green incl. 20-seed uniqueness.

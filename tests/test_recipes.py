@@ -19,8 +19,8 @@ def test_registry_not_empty(kinds):
     assert len(kinds) >= 4
 
 
-@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "sphere",
-                                  "cube"])
+@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "tree",
+                                  "sphere", "cube"])
 def test_kind_passes_gates(kind):
     catalog.load_all()
     for seed in (7, 42, 99):
@@ -32,7 +32,7 @@ def test_kind_passes_gates(kind):
         assert qa["passed"], f"{kind} seed {seed}: {failed}"
 
 
-@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate"])
+@pytest.mark.parametrize("kind", ["bush", "rock", "barrel", "crate", "tree"])
 def test_twenty_seeds_unique_and_whole(kind):
     catalog.load_all()
     digests = []
