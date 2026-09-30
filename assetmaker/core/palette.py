@@ -97,7 +97,7 @@ RAMPS: dict[str, Ramp] = {
         ("#7e6621", "#917e55", "#a38957", "#ad9a70", "#bc9d5f", "#d9cba6"),
     ),
     "canvas": Ramp(
-        "canvas", "#57503c",
+        "canvas", "#3c230e",
         ("#8a8064", "#ae9d74", "#cebd91", "#d9cba6", "#efe7c3"),
     ),
     "metal": Ramp(
@@ -121,7 +121,7 @@ RAMPS: dict[str, Ramp] = {
         ("#505023", "#7e6621", "#98942c", "#abb948", "#d0c060"),
     ),
     "cream": Ramp(
-        "cream", "#57503c",
+        "cream", "#231a14",
         ("#8a8064", "#b1a888", "#d9cba6", "#efe7c3"),
     ),
 }
@@ -204,3 +204,23 @@ def make_ramp(name: str, base: str, outline: str | None = None) -> Ramp:
     light2 = shift_color(base, -0.05, -0.14, +0.22)
     out = outline or shift_color(dark2, +0.02, +0.05, -0.18)
     return Ramp(name, out, (dark2, dark1, base, light1, light2))
+
+
+def register_ramp(ramp: Ramp) -> Ramp:
+    """Add a generated ramp (variant colors) to the master palette.
+
+    Pure and deterministic: same ramp name/base => same colors, so QA
+    palette-purity stays meaningful and seeds stay reproducible.
+    """
+    global ALL_COLORS, _COLOR_SET, _HEX_TO_RGBA
+    RAMPS[ramp.name] = ramp
+    merged = list(ALL_COLORS)
+    for c in ramp.all_colors:
+        if c not in _COLOR_SET:
+            merged.append(c)
+    ALL_COLORS = tuple(merged)
+    _COLOR_SET = frozenset(ALL_COLORS)
+    for c in ramp.all_colors:
+        _HEX_TO_RGBA.setdefault(
+            c, (int(c[1:3], 16), int(c[3:5], 16), int(c[5:7], 16), 255))
+    return ramp

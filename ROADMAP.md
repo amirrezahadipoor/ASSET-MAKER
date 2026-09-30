@@ -14,9 +14,9 @@ milestone whose gate failed.
 - [x] M3 Recipe `tree` (leaf clusters, trunk, roots, shadow). Hardest static
       quality test; do not continue until it is convincingly close to the
       reference trees
-- [ ] M4 Rig system: parts, bones, pivots, idle/walk animation exporter,
+- [x] M4 Rig system: parts, bones, pivots, idle/walk animation exporter,
       Godot loader. Gate: rig recomposes to the full image
-- [ ] M5 Recipe `chicken` (with rig, idle, walk, peck) and `statue` (knight
+- [x] M5 Recipe `chicken` (with rig, idle, walk, peck) and `statue` (knight
       on plinth, static + optional subtle rig)
 - [ ] M6 Recipe `human` (modular parts: hair, tunic colors, 4 directions),
       docs: RECIPE_GUIDE.md so another AI can add a new recipe in one file
@@ -78,3 +78,24 @@ subtler than the reference's visible forks. Inspected at pixel level (the
 workspace image viewer is serving stale images this session, so visual checks
 are ASCII pixel maps + quantitative stats — noted for transparency).
 Gates: 28 pytest tests green incl. 20-seed uniqueness.
+
+### 2026-09-30 M4 — PASS
+Built: godot/asset_loader.gd (Godot 4 Skeleton2D/Bone2D/Sprite2D/Animation
+builder from manifest.json), rig tests (2-part synthetic asset recomposes to
+full with 0 px diff; animation frames genuinely differ; manifest rig schema
+locked). Fixed a real recompose-order bug (parts must composite by rig z, not
+name). Gate: rig recomposes exactly — verified in tests and per-asset QA.
+
+### 2026-09-30 M5 — PASS
+Built: chicken (6-part rig: root/neck/head/wing/two legs, idle+walk+peck
+sheets, 3 colorways incl. generated hen_brown ramp via deterministic
+register_ramp) and statue (knight on stepped plinth, 2-part subtle-sway rig,
+3 variants: plume/sword/shield differences). All QA gates pass per asset
+(palette, alpha, outline, light, size, anchor, recompose) + 33 pytest tests.
+Honest critique: chicken body/wing/tail/comb/legs read as the reference bird
+at pixel level; head part pivots are right for peck; walk leg swings are
+larger-angle NN rotations (slightly crunchy at 1x, acceptable per style).
+Statue: plinth/figure silhouettes and stone shading are right; the figure is
+simpler than the reference knight (no tabard emblem, blockier helmet).
+Note: image-viewer tooling served stale images this session; all visual
+inspection is pixel-map + quantitative based.

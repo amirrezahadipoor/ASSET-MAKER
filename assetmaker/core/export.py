@@ -89,12 +89,18 @@ class AssetResult:
     rig: dict | None = None
     colors_used: set[str] = field(default_factory=set)
 
+    def part_order(self) -> list[str]:
+        """Composite order: rig z when available, else insertion order."""
+        if self.rig and self.rig.get("parts"):
+            return [p["name"] for p in self.rig["parts"]]
+        return list(self.parts.keys())
+
     def full(self) -> Canvas:
         """Composite shadow + parts in z order -> the full image."""
         c = Canvas(self.width, self.height)
         c.composite(self.shadow)
-        for _, p in self.parts.items():
-            c.composite(p)
+        for name in self.part_order():
+            c.composite(self.parts[name])
         return c
 
 

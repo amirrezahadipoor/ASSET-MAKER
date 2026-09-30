@@ -12,11 +12,12 @@ from .qa import gates
 from .recipes import catalog
 
 
-def _composite_parts(parts: dict[str, Canvas]) -> Canvas:
+def _composite_parts(parts: dict[str, Canvas],
+                     order: list[str] | None = None) -> Canvas:
     first = next(iter(parts.values()))
     out = Canvas(first.w, first.h)
-    for _, p in parts.items():
-        out.composite(p)
+    for name in (order or list(parts.keys())):
+        out.composite(parts[name])
     return out
 
 
@@ -59,12 +60,12 @@ def export_asset(res: AssetResult, root: Path, run_qa: bool = True) -> dict:
 
     sh_img = np.array(Image.open(d / files["shadow"]).convert("RGBA"))
     recomposed.buf = sh_img
-    for pname in sorted(res.parts):
+    for pname in res.part_order():
         p_img = np.array(Image.open(d / files["parts"][pname]).convert("RGBA"))
         m = p_img[..., 3] > 0
         recomposed.buf[m] = p_img[m]
 
-    obj = _composite_parts(res.parts)
+    obj = _composite_parts(res.parts, res.part_order())
     obj_mask = obj.alpha_mask()
 
     qa = {"passed": True, "checks": {}}
